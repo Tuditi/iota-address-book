@@ -1,0 +1,11 @@
+# Repository
+.vscode/
+
+# Common files and folders
+**/node_modules/
+**/out/
+**/tests/
+**/dist/
+
+# ESLint configuration and files
+**/.eslintrc.js

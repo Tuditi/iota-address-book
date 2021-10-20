@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "outDir": "dist",
+    "rootDir": "src/electron",
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2020", "dom"]
+  },
+  "exclude": [
+    "node_modules",
+    "dist/www",
+    "out/**",
+    "src/frontend/**"
+  ],
+  "include": ["src/electron/**/*"]
+}

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+      "types": ["jest"]
+  },
+  "include": [
+      "src/electron",
+      "src/frontend"
+  ],
+}
