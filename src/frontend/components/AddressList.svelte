@@ -1,6 +1,6 @@
 <script lang='ts'>
   import { addresses } from '../store/addresses';
-  import type { IAddressEntry } from '../types/IAddressEntry';
+  import type { IAddressEntry } from '../../shared/IAddressEntry';
 
   function removeEntry(entry: IAddressEntry): void {
     addresses.update((list) => {

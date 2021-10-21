@@ -1,11 +1,12 @@
 <script lang='ts'>  
+  import { CHANNEL } from '../../shared/Channel';
   let systemInfo: string;
 
   async function sendIpcRequest(): Promise<void> {
-    globalThis.api.send('requestSystemInfo', null);
+    globalThis.api.send(CHANNEL.REQUEST_SYSTEM_INFO, null);
   }
 
-  globalThis.api.receive("getSystemInfo", (data) => {
+  globalThis.api.receive(CHANNEL.GET_SYSTEM_INFO, (data) => {
     systemInfo = data[0];
   });
 </script>

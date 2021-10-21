@@ -3,6 +3,8 @@
   import { SingleNodeClient } from '@iota/iota.js';
 
   import { addresses } from '../store/addresses';
+  import type { IAddressEntry } from '../../shared/IAddressEntry';
+  import { CHANNEL } from '../../shared/Channel';
 
   const API_ENDPOINT = 'https://chrysalis-nodes.iota.org/';
 
@@ -14,7 +16,6 @@
 
   onMount(async () => {
     balance = (await client.address('iota1qzd6z226hqz9hqeexmh6yk9gpk424tyrepw7dfpzu3e5w5wqlfpyzl3tnfm')).balance;
-    console.log("balance:", balance);
   });
 
   async function addVerifiedAddress(): Promise<void> {
@@ -28,12 +29,14 @@
   }
 
   function addEntry(): void {
+    const entry: IAddressEntry = {
+      address,
+      balance,
+    }
+    globalThis.api.send(CHANNEL.ADD_ADDRESS, entry);
     addresses.update(
       (list) => {
-        list.push({
-          address,
-          balance
-        });
+        list.push(entry);
         return list;
       }
     );

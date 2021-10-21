@@ -3,7 +3,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 import electronReload from 'electron-reload';
-import { IpcChannelInterface } from './IPC/IpcCHannelInterface';
+import { IpcChannelInterface } from './IPC/IpcChannelInterface';
 import { IpcRequest } from '../shared/IpcRequest';
 import { SystemInfoChannel } from './IPC/SystemInfoChannel';
 
@@ -50,7 +50,7 @@ class Main {
   private registerIpcChannels(ipcChannels: IpcChannelInterface[]) {
     ipcChannels.forEach(
       channel => {
-        ipcMain.on(channel.name, (event, request: IpcRequest) =>
+        ipcMain.on(channel.requestChannel, (event, request: IpcRequest) =>
         {
           event.sender.send(
             channel.responseChannel,

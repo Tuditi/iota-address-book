@@ -1,19 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { contextBridge, ipcRenderer } from 'electron';
+import { CHANNEL } from '../shared/Channel';
 
 contextBridge.exposeInMainWorld(
   'api', {
-    send: (channel: string, data: any) =>
+    send: (channel: CHANNEL, data: any) =>
     {
-      const validChannels = ['requestSystemInfo'];
+      const validChannels = [
+        CHANNEL.REQUEST_SYSTEM_INFO,
+        CHANNEL.ADD_ADDRESS
+      ];
       if (validChannels.includes(channel))
       {
         ipcRenderer.send(channel, data);
       }
     },
-    receive: (channel: string, func: (args: any) => void) =>
+    receive: (channel: CHANNEL, func: (args: any) => void) =>
     {
-      const validChannels = ['getSystemInfo'];
+      const validChannels = [CHANNEL.GET_SYSTEM_INFO, CHANNEL.ADDRESS_ADDED];
       if (validChannels.includes(channel))
       {
         ipcRenderer.on(channel, (event, ...args) => func(args));
