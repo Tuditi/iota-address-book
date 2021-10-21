@@ -1,6 +1,6 @@
 <script lang='ts'>
   import { onMount } from 'svelte';
-  import { SingleNodeClient, Bech32Helper } from '@iota/iota.js';
+  import { SingleNodeClient } from '@iota/iota.js';
 
   import { addresses } from '../store/addresses';
 
@@ -10,6 +10,7 @@
 
   let address = '';
   let balance: number;
+  let error = { present: false, message: ''};
 
   onMount(async () => {
     balance = (await client.address('iota1qzd6z226hqz9hqeexmh6yk9gpk424tyrepw7dfpzu3e5w5wqlfpyzl3tnfm')).balance;
@@ -18,20 +19,24 @@
 
   async function addVerifiedAddress(): Promise<void> {
     try {
-      (await client.address(address)).balance
-      Bech32Helper.fromBech32(address, 'iota');
-      addresses.update(
-        (list) => {
-          list.push({
-            address,
-            balance
-          });
-          return list;
-        }
-      );
-    } catch (_) {
-      console.log('Invalid Address:', address);
+      balance = (await client.address(address)).balance;
+      addEntry();
+    } catch (e) {
+      console.log(e);
+      error = { present: true, message: e.message };
     };
+  }
+
+  function addEntry(): void {
+    addresses.update(
+      (list) => {
+        list.push({
+          address,
+          balance
+        });
+        return list;
+      }
+    );
   }
   
 </script>
@@ -41,3 +46,7 @@
 <button on:click={addVerifiedAddress}>
   Add
 </button>
+
+{#if error.present}
+  <p>Error: {error.message} </p>
+{/if}
