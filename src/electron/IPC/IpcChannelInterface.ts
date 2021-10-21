@@ -1,9 +1,8 @@
 import { IpcMainEvent } from 'electron';
 import { IpcRequest } from '../../shared/IpcRequest';
 
-export interface IpcChannelInterface {
+export interface IpcChannelInterface<T> {
   readonly requestChannel: string;
   readonly responseChannel: string;
-  // TODO: use generics result<T>
-  result(event: IpcMainEvent, request: IpcRequest): string | PromiseLike<string>;
+  result(event: IpcMainEvent, request: IpcRequest): T | PromiseLike<T>;
 }

@@ -3,11 +3,11 @@ import { CHANNEL } from '../../shared/Channel';
 import { IpcRequest } from '../../shared/IpcRequest';
 import { IpcChannelInterface } from './IpcChannelInterface';
 
-export class SystemInfoChannel implements IpcChannelInterface {
+export class SystemInfoChannel implements IpcChannelInterface<string> {
   readonly requestChannel = CHANNEL.REQUEST_SYSTEM_INFO;
   readonly responseChannel = CHANNEL.GET_SYSTEM_INFO;
 
-  result(event: IpcMainEvent, request: IpcRequest): string {
+  result(_: IpcMainEvent, __: IpcRequest): string {
     return 'chrome v44';
   }
 }

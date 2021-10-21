@@ -8,7 +8,9 @@ contextBridge.exposeInMainWorld(
     {
       const validChannels = [
         CHANNEL.REQUEST_SYSTEM_INFO,
-        CHANNEL.ADD_ADDRESS
+        CHANNEL.ADD_ADDRESS,
+        CHANNEL.READ_ADDRESSES,
+        CHANNEL.DELETE_ADDRESS,
       ];
       if (validChannels.includes(channel))
       {
@@ -17,10 +19,15 @@ contextBridge.exposeInMainWorld(
     },
     receive: (channel: CHANNEL, func: (args: any) => void) =>
     {
-      const validChannels = [CHANNEL.GET_SYSTEM_INFO, CHANNEL.ADDRESS_ADDED];
+      const validChannels = [
+        CHANNEL.GET_SYSTEM_INFO,
+        CHANNEL.ADDRESS_ADDED,
+        CHANNEL.ADDRESS_READ,
+        CHANNEL.ADDRESS_DELETED,
+      ];
       if (validChannels.includes(channel))
       {
-        ipcRenderer.on(channel, (event, ...args) => func(args));
+        ipcRenderer.on(channel, (_, ...args) => func(args));
       }
     }
   }

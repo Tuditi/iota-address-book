@@ -5,14 +5,20 @@ import * as path from 'path';
 import electronReload from 'electron-reload';
 import { IpcChannelInterface } from './IPC/IpcChannelInterface';
 import { IpcRequest } from '../shared/IpcRequest';
+import { AddressBook } from '../shared/AddressBook';
 import { SystemInfoChannel } from './IPC/SystemInfoChannel';
+import { AddAddressChannel } from './IPC/AddAddressChannel';
+import { DeleteAddressChannel } from './IPC/DeleteAddressChannel';
+import { ReadAddressChannel } from './IPC/ReadAddressesChannel';
+
 
 electronReload(__dirname, {});
+const addressBook = new AddressBook();
 
 class Main {
   private window?: BrowserWindow;
 
-  public init(ipcChannels: IpcChannelInterface[]): void {
+  public init(ipcChannels: IpcChannelInterface<unknown>[]): void {
     app.on('ready', this.createWindow);
     app.on('activate', this.onActivate);
     app.on('window-all-closed', this.onWindowAllClosed);
@@ -47,14 +53,15 @@ class Main {
     }
   }
 
-  private registerIpcChannels(ipcChannels: IpcChannelInterface[]) {
+  private registerIpcChannels(ipcChannels: IpcChannelInterface<unknown>[]) {
     ipcChannels.forEach(
       channel => {
-        ipcMain.on(channel.requestChannel, (event, request: IpcRequest) =>
+        ipcMain.on(channel.requestChannel, async (event, request: IpcRequest) =>
         {
+          const result = await channel.result(event, request);
           event.sender.send(
             channel.responseChannel,
-            channel.result(event, request)
+            result
           );
         });
       }
@@ -64,4 +71,7 @@ class Main {
 
 (new Main()).init([
   new SystemInfoChannel(),
+  new AddAddressChannel(addressBook),
+  new DeleteAddressChannel(addressBook),
+  new ReadAddressChannel(addressBook),
 ]);

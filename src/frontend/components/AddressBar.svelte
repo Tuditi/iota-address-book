@@ -7,7 +7,6 @@
   import { CHANNEL } from '../../shared/Channel';
 
   const API_ENDPOINT = 'https://chrysalis-nodes.iota.org/';
-
   const client = new SingleNodeClient(API_ENDPOINT);
 
   let address = '';
@@ -33,7 +32,7 @@
       address,
       balance,
     }
-    globalThis.api.send(CHANNEL.ADD_ADDRESS, entry);
+    globalThis.api.send(CHANNEL.ADD_ADDRESS, { data: entry });
     addresses.update(
       (list) => {
         list.push(entry);

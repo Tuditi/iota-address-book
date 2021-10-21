@@ -4,5 +4,8 @@ export enum CHANNEL {
   ADD_ADDRESS = 'addAddress',
   ADDRESS_ADDED = 'addressAdded',
   GET_ADDRESSES = 'getAddresses',
-  RETURN_ADDRESSES = 'returnAddresses',
+  READ_ADDRESSES = 'readAddresses',
+  ADDRESS_READ = 'addressRead',
+  DELETE_ADDRESS = 'deleteAddress',
+  ADDRESS_DELETED = 'addressDeleted',
 }
