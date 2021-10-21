@@ -1,6 +1,6 @@
 <script lang='ts'>
   import AddressBar from './components/AddressBar.svelte';
-import AddressList from './components/AddressList.svelte';
+  import AddressList from './components/AddressList.svelte';
 	export let name: string;
 </script>
 

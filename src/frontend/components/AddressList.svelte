@@ -10,15 +10,26 @@
   }
 </script>
 
-<ul>
-  Address, Balance
-  {#each $addresses as entry}
-    <p>
-      {entry.address}
-      {entry.balance}
-      <button on:click={() => removeEntry(entry)}>
-        -
-      </button>
-    </p>
-  {/each}
-</ul>
+<table class='table'>
+  <thead>
+    <tr>
+      <th scope='col'>#</th>
+      <th scope='col'>Address</th>
+      <th scope='col'>Balance</th>
+      <th scope='col'></th>
+    </tr>
+  </thead>
+  <tbody>
+    {#each $addresses as entry, i}
+    <tr>
+      <th scope='row'>{i}</th>
+      <td>{entry.address}</td>
+      <td>{entry.balance}</td>
+      <td>
+        <button on:click={() => removeEntry(entry)}> - </button>
+        <button on:click={() => removeEntry(entry)}> Copy </button>
+      </td>
+    </tr>
+    {/each}
+  </tbody>
+</table>
