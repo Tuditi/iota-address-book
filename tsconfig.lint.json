@@ -4,6 +4,7 @@
   },
   "include": [
       "src/electron",
-      "src/frontend"
+      "src/frontend",
+      "src/shared"
   ],
 }

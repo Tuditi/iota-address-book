@@ -15,7 +15,7 @@ const eslintRules = {
   'no-alert': 'error',
   'no-async-promise-executor': 'error',
   'no-case-declarations': 'error',
-  'no-console': ['error', { allow: ['error', 'warn'] }],
+  'no-console': 'warn',
   'no-control-regex': 'error',
   'no-dupe-keys': 'error',
   'no-empty': 'error',

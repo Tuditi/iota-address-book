@@ -1,6 +1,7 @@
 <script lang='ts'>
   import AddressBar from './components/AddressBar.svelte';
   import AddressList from './components/AddressList.svelte';
+  import SystemInfo from './components/SystemInfo.svelte';
 	export let name: string;
 </script>
 
@@ -8,6 +9,7 @@
 	<h1>IOTA {name}!</h1>
   <AddressBar />
   <AddressList />
+  <SystemInfo />
 </main>
 
 <style>

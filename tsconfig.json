@@ -3,7 +3,7 @@
     "target": "esnext",
     "module": "commonjs",
     "outDir": "dist",
-    "rootDir": "src/electron",
+    "rootDir": "src",
     "strict": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -18,5 +18,5 @@
     "out/**",
     "src/frontend/**"
   ],
-  "include": ["src/electron/**/*"]
+  "include": ["src/**/*"]
 }

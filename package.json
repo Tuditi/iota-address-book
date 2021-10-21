@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "description": "An example IOTA wallet with Svelte, Electron, and TypeScript.",
   "private": true,
-  "main": "dist/index.js",
+  "main": "dist/electron/index.js",
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.0",
     "@tsconfig/svelte": "^1.0.10",
