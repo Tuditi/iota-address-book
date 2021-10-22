@@ -1,8 +1,9 @@
 <script lang='ts'>
-  // import { addresses } from '../store/addresses';
+  import { onMount } from 'svelte';
+  import { Trash } from 'svelte-bootstrap-icons/lib/Trash';
+
   import type { IAddressEntry } from '../../shared/IAddressEntry';
   import { CHANNEL } from '../../shared/Channel';
-  import { onMount } from 'svelte';
 
   let addresses: IAddressEntry[];
 
@@ -42,33 +43,39 @@
   $: filterAddresses(searchValue);
 </script>
 
-<br />
-<input bind:value={searchValue} placeholder='Search for an address or balance'>
+<div class='container'>
+  <div class='row d-flex justify-content-end w-25'>
+    <input bind:value={searchValue} placeholder='Search for an address or balance'>
+  </div>
 
-<table class='table'>
-  <thead>
-    <tr>
-      <th scope='col'>#</th>
-      <th scope='col'>Address</th>
-      <th scope='col'>Balance</th>
-      <th scope='col'></th>
-    </tr>
-  </thead>
-  <tbody>
-    {#if addresses}
-      {#each filteredAddresses as entry, i}
-      <tr>
-        <th scope='row'>{i}</th>
-        <td>{entry.address}</td>
-        <td>{entry.balance}</td>
-        <td>
-          <button on:click={() => removeEntry(entry)}> - </button>
-          <button on:click={() => removeEntry(entry)}> Copy </button>
-        </td>
-      </tr>
-      {/each}
-    {:else}
-      Loading...
-    {/if}
-  </tbody>
-</table>
+  <div class='row'> 
+    <table class='table'>
+      <thead>
+        <tr>
+          <th scope='col'>#</th>
+          <th scope='col'>Address</th>
+          <th scope='col'>Balance</th>
+          <th scope='col'></th>
+        </tr>
+      </thead>
+      <tbody>
+        {#if addresses}
+          {#each filteredAddresses as entry, i}
+          <tr>
+            <th scope='row'>{i+1}</th>
+            <td>{entry.address}</td>
+            <td>{entry.balance}</td>
+            <td>
+              <button class='btn-primary' on:click={() => removeEntry(entry)}>
+                <Trash />
+              </button>
+            </td>
+          </tr>
+          {/each}
+        {:else}
+          Loading...
+        {/if}
+      </tbody>
+    </table>
+  </div>
+</div>

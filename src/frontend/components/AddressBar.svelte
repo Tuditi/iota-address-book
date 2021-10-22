@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
   import { SingleNodeClient } from '@iota/iota.js';
 
-  import { addresses } from '../store/addresses';
   import type { IAddressEntry } from '../../shared/IAddressEntry';
   import { CHANNEL } from '../../shared/Channel';
 
@@ -33,14 +32,7 @@
       balance,
     }
     globalThis.api.send(CHANNEL.ADD_ADDRESS, { data: entry });
-    addresses.update(
-      (list) => {
-        list.push(entry);
-        return list;
-      }
-    );
-  }
-  
+  }  
 </script>
 
 <p>Enter a valid IOTA Address:</p>
