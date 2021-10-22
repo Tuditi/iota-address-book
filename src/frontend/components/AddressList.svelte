@@ -3,7 +3,7 @@
   import { Trash } from 'svelte-bootstrap-icons/lib/Trash';
 
   import type { IAddressEntry } from '../../shared/IAddressEntry';
-  import { CHANNEL } from '../../shared/Channel';
+  import { CHANNEL } from '../../shared/Channels';
 
   let addresses: IAddressEntry[];
 
@@ -11,16 +11,16 @@
   let filteredAddresses: IAddressEntry[];
 
   onMount(async () => {
-    globalThis.api.send(CHANNEL.READ_ADDRESSES, null);
+    globalThis.api.send(CHANNEL.GET_ADDRESSES, null);
   });
 
-  globalThis.api.receive(CHANNEL.ADDRESS_READ, (data) => {
+  globalThis.api.receive(CHANNEL.ADDRESSES, (data) => {
     filteredAddresses = data[0];
     addresses = data[0];
   });
 
   globalThis.api.receive(CHANNEL.ADDRESS_DELETED, (_) => {
-    globalThis.api.send(CHANNEL.READ_ADDRESSES, null);
+    globalThis.api.send(CHANNEL.GET_ADDRESSES, null);
   })
 
   function removeEntry(entry: IAddressEntry): void {
@@ -44,7 +44,7 @@
 </script>
 
 <div class='container'>
-  <div class='row d-flex justify-content-end w-25'>
+  <div class='row d-flex justify-content-evenly w-25 mt-3'>
     <input bind:value={searchValue} placeholder='Search for an address or balance'>
   </div>
 
@@ -61,12 +61,12 @@
       <tbody>
         {#if addresses}
           {#each filteredAddresses as entry, i}
-          <tr>
+          <tr class='align-middle'>
             <th scope='row'>{i+1}</th>
             <td>{entry.address}</td>
-            <td>{entry.balance}</td>
+            <td>{entry.balance} MIOTA</td>
             <td>
-              <button class='btn-primary' on:click={() => removeEntry(entry)}>
+              <button class='btn-danger px-2' on:click={() => removeEntry(entry)}>
                 <Trash />
               </button>
             </td>

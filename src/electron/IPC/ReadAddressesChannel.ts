@@ -1,13 +1,13 @@
 import { IpcMainEvent } from 'electron';
 import { AddressBook } from '../../shared/AddressBook';
-import { CHANNEL } from '../../shared/Channel';
+import { CHANNEL } from '../../shared/Channels';
 import { IAddressEntry } from '../../shared/IAddressEntry';
 import { IpcRequest } from '../../shared/IpcRequest';
 import { IpcChannelInterface } from './IpcChannelInterface';
 
 export class ReadAddressChannel implements IpcChannelInterface<IAddressEntry[]> {
-  public readonly requestChannel = CHANNEL.READ_ADDRESSES;
-  public readonly responseChannel = CHANNEL.ADDRESS_READ;
+  public readonly requestChannel = CHANNEL.GET_ADDRESSES;
+  public readonly responseChannel = CHANNEL.ADDRESSES;
 
   constructor(private addressBook: AddressBook) {}
 

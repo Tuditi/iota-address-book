@@ -1,6 +1,6 @@
 import { IpcMainEvent } from 'electron';
 import { AddressBook } from '../../shared/AddressBook';
-import { CHANNEL } from '../../shared/Channel';
+import { CHANNEL } from '../../shared/Channels';
 import { IAddressEntry } from '../../shared/IAddressEntry';
 import { IpcRequest } from '../../shared/IpcRequest';
 import { IpcChannelInterface } from './IpcChannelInterface';

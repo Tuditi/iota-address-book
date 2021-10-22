@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { contextBridge, ipcRenderer } from 'electron';
-import { CHANNEL } from '../shared/Channel';
+import { CHANNEL } from '../shared/Channels';
 
 contextBridge.exposeInMainWorld(
   'api', {
@@ -8,7 +8,7 @@ contextBridge.exposeInMainWorld(
     {
       const validChannels = [
         CHANNEL.ADD_ADDRESS,
-        CHANNEL.READ_ADDRESSES,
+        CHANNEL.GET_ADDRESSES,
         CHANNEL.DELETE_ADDRESS,
       ];
       if (validChannels.includes(channel))
@@ -19,8 +19,7 @@ contextBridge.exposeInMainWorld(
     receive: (channel: CHANNEL, func: (args: any) => void) =>
     {
       const validChannels = [
-        CHANNEL.ADDRESS_ADDED,
-        CHANNEL.ADDRESS_READ,
+        CHANNEL.ADDRESSES,
         CHANNEL.ADDRESS_DELETED,
       ];
       if (validChannels.includes(channel))
