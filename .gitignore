@@ -1,7 +1,9 @@
 /node_modules/
 /public/build/
 /out/
-/dist/
+/dist/build
+/dist/electron
+/dist/shared
 
 .eslintcache
 
