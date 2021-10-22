@@ -29,15 +29,21 @@
 
   function filterAddresses(filter: string): void {
     if (filter) {
-      filteredAddresses = addresses.filter((entry) => validEntry(entry, filter));      
+      filteredAddresses = addresses.filter((entry) => validEntry(entry));      
     } else {
       filteredAddresses = addresses;
     }
   }
 
-  function validEntry(entry: IAddressEntry, conditional: string): boolean {
-    return entry.address.startsWith(conditional) || 
-      entry.balance.toString().startsWith(conditional);
+  function validEntry(entry: IAddressEntry): boolean {
+    return entry.address.startsWith(searchValue) || 
+      entry.balance.toString().startsWith(searchValue);
+  }
+
+  function formatBalance(balance: number): string {
+    const magnitude = ['i', 'Ki', 'Mi', 'Gi', 'Pi'];
+    const e = Math.floor(Math.log(balance)/Math.log(1000));
+    return (balance / Math.pow(1000, e)).toFixed(2) + ' ' + magnitude[e];
   }
 
   $: filterAddresses(searchValue);
@@ -64,7 +70,7 @@
           <tr class='align-middle'>
             <th scope='row'>{i+1}</th>
             <td>{entry.address}</td>
-            <td>{entry.balance} MIOTA</td>
+            <td>{formatBalance(entry.balance)}</td>
             <td>
               <button class='btn btn-danger px-2' on:click={() => removeEntry(entry)}>
                 <Trash />
