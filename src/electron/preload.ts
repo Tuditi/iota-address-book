@@ -7,7 +7,6 @@ contextBridge.exposeInMainWorld(
     send: (channel: CHANNEL, data: any) =>
     {
       const validChannels = [
-        CHANNEL.REQUEST_SYSTEM_INFO,
         CHANNEL.ADD_ADDRESS,
         CHANNEL.READ_ADDRESSES,
         CHANNEL.DELETE_ADDRESS,
@@ -20,7 +19,6 @@ contextBridge.exposeInMainWorld(
     receive: (channel: CHANNEL, func: (args: any) => void) =>
     {
       const validChannels = [
-        CHANNEL.GET_SYSTEM_INFO,
         CHANNEL.ADDRESS_ADDED,
         CHANNEL.ADDRESS_READ,
         CHANNEL.ADDRESS_DELETED,

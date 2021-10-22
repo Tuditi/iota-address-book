@@ -6,7 +6,6 @@ import electronReload from 'electron-reload';
 import { IpcChannelInterface } from './IPC/IpcChannelInterface';
 import { IpcRequest } from '../shared/IpcRequest';
 import { AddressBook } from '../shared/AddressBook';
-import { SystemInfoChannel } from './IPC/SystemInfoChannel';
 import { AddAddressChannel } from './IPC/AddAddressChannel';
 import { DeleteAddressChannel } from './IPC/DeleteAddressChannel';
 import { ReadAddressChannel } from './IPC/ReadAddressesChannel';
@@ -70,7 +69,6 @@ class Main {
 }
 
 (new Main()).init([
-  new SystemInfoChannel(),
   new AddAddressChannel(addressBook),
   new DeleteAddressChannel(addressBook),
   new ReadAddressChannel(addressBook),
