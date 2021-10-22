@@ -25,6 +25,7 @@
     "nodemon": "^2.0.14",
     "prettier": "^2.3.2",
     "svelte": "^3.31.2",
+    "svelte-bootstrap-icons": "^1.6.1",
     "svelte-check": "^1.0.46",
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^4.3.0",
