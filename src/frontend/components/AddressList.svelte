@@ -44,7 +44,7 @@
 </script>
 
 <div class='container'>
-  <div class='row d-flex justify-content-evenly w-25 mt-3'>
+  <div class='row w-25 mt-3'>
     <input bind:value={searchValue} placeholder='Search for an address or balance'>
   </div>
 
@@ -66,7 +66,7 @@
             <td>{entry.address}</td>
             <td>{entry.balance} MIOTA</td>
             <td>
-              <button class='btn-danger px-2' on:click={() => removeEntry(entry)}>
+              <button class='btn btn-danger px-2' on:click={() => removeEntry(entry)}>
                 <Trash />
               </button>
             </td>

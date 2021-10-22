@@ -3,7 +3,7 @@
   import { SingleNodeClient } from '@iota/iota.js';
 
   import type { IAddressEntry } from '../../shared/IAddressEntry';
-  import { CHANNEL } from '../../shared/Channel';
+  import { CHANNEL } from '../../shared/Channels';
 
   const API_ENDPOINT = 'https://chrysalis-nodes.iota.org/';
   const client = new SingleNodeClient(API_ENDPOINT);
@@ -35,12 +35,16 @@
   }  
 </script>
 
-<p>Enter a valid IOTA Address:</p>
-<input bind:value={address} placeholder='Enter your address'>
-<button on:click={addVerifiedAddress}>
-  Add
-</button>
-
-{#if error.present}
-  <p>Error: {error.message} </p>
-{/if}
+<div class='container'>
+  <p>Enter a valid IOTA Address:</p>
+  <input bind:value={address} placeholder='Enter your address'>
+  <button on:click={addVerifiedAddress}>
+    Add
+  </button>
+  
+  {#if error.present}
+    <div class='alert alert-danger my-3 w-100' role='alert'>
+      The following error occured: {error.message}
+    </div>
+  {/if}
+</div>
