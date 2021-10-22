@@ -6,11 +6,15 @@
 
   let addresses: IAddressEntry[];
 
+  let searchValue: string;
+  let filteredAddresses: IAddressEntry[];
+
   onMount(async () => {
     globalThis.api.send(CHANNEL.READ_ADDRESSES, null);
   });
 
   globalThis.api.receive(CHANNEL.ADDRESS_READ, (data) => {
+    filteredAddresses = data[0];
     addresses = data[0];
   });
 
@@ -21,7 +25,25 @@
   function removeEntry(entry: IAddressEntry): void {
     globalThis.api.send(CHANNEL.DELETE_ADDRESS, { data: entry });
   }
+
+  function filterAddresses(filter: string): void {
+    if (filter) {
+      filteredAddresses = addresses.filter((entry) => validEntry(entry, filter));      
+    } else {
+      filteredAddresses = addresses;
+    }
+  }
+
+  function validEntry(entry: IAddressEntry, conditional: string): boolean {
+    return entry.address.startsWith(conditional) || 
+      entry.balance.toString().startsWith(conditional);
+  }
+
+  $: filterAddresses(searchValue);
 </script>
+
+<br />
+<input bind:value={searchValue} placeholder='Search for an address or balance'>
 
 <table class='table'>
   <thead>
@@ -34,7 +56,7 @@
   </thead>
   <tbody>
     {#if addresses}
-      {#each addresses as entry, i}
+      {#each filteredAddresses as entry, i}
       <tr>
         <th scope='row'>{i}</th>
         <td>{entry.address}</td>
