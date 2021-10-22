@@ -27,8 +27,8 @@ class Main {
 
   private async createWindow(): Promise<void> {
     this.window = new BrowserWindow({
-      height: 600,
-      width: 900,
+      height: 900,
+      width: 1200,
       webPreferences: {
         nodeIntegration: true,
         preload: path.join(__dirname, 'preload.js')
