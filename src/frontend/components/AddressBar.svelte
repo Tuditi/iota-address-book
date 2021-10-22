@@ -21,7 +21,6 @@
       balance = (await client.address(address)).balance;
       addEntry();
     } catch (e) {
-      console.log(e);
       error = { present: true, message: e.message };
     };
   }
