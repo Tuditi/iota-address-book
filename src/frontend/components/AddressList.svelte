@@ -41,6 +41,7 @@
   }
 
   function formatBalance(balance: number): string {
+    if (balance === 0) { return '0' };
     const magnitude = ['i', 'Ki', 'Mi', 'Gi', 'Pi'];
     const e = Math.floor(Math.log(balance)/Math.log(1000));
     return (balance / Math.pow(1000, e)).toFixed(2) + ' ' + magnitude[e];
@@ -68,7 +69,7 @@
         {#if addresses}
           {#each filteredAddresses as entry, i}
           <tr class='align-middle'>
-            <th scope='row'>{i+1}</th>
+            <th scope='row'>{i}</th>
             <td>{entry.address}</td>
             <td>{formatBalance(entry.balance)}</td>
             <td>
