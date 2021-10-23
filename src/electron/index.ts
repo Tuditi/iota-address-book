@@ -3,6 +3,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 import electronReload from 'electron-reload';
+
 import { IpcChannelInterface } from './IPC/IpcChannelInterface';
 import { IpcRequest } from '../shared/IpcRequest';
 import { AddressBook } from './store/AddressBook';
@@ -10,14 +11,13 @@ import { AddAddressChannel } from './IPC/AddAddressChannel';
 import { DeleteAddressChannel } from './IPC/DeleteAddressChannel';
 import { ReadAddressChannel } from './IPC/ReadAddressesChannel';
 
-
 electronReload(__dirname, {});
 const addressBook = new AddressBook();
 
 class Main {
   private window?: BrowserWindow;
 
-  public init(ipcChannels: IpcChannelInterface<unknown>[]): void {
+  public constructor(ipcChannels: IpcChannelInterface<unknown>[]) {
     app.on('ready', this.createWindow);
     app.on('activate', this.onActivate);
     app.on('window-all-closed', this.onWindowAllClosed);
@@ -52,7 +52,7 @@ class Main {
     }
   }
 
-  private registerIpcChannels(ipcChannels: IpcChannelInterface<unknown>[]) {
+  private registerIpcChannels(ipcChannels: IpcChannelInterface<unknown>[]): void {
     ipcChannels.forEach(
       channel => {
         ipcMain.on(channel.requestChannel, async (event, request: IpcRequest) =>
@@ -68,7 +68,7 @@ class Main {
   }
 }
 
-(new Main()).init([
+new Main([
   new AddAddressChannel(addressBook),
   new DeleteAddressChannel(addressBook),
   new ReadAddressChannel(addressBook),

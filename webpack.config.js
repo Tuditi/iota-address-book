@@ -22,40 +22,40 @@ module.exports = {
 		chunkFilename: '[name].[id].js'
 	},
 	module: {
-			rules: [
-				{
-					test: /\.ts$/,
-					loader: 'ts-loader',
-					exclude: /node_modules/
-				},
-				{
-				test: /\.svelte$/,
-				use: {
-					loader: 'svelte-loader',
-					options: {
-						compilerOptions: {
-							dev: !prod
-						},
-						emitCss: prod,
-						hotReload: !prod,
-							preprocess: sveltePreprocess({ sourceMap: !prod })
-					}
-				}
-			},
-			{
-				test: /\.css$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader'
-				]
-			},
-			{
-				// required to prevent errors from Svelte on Webpack 5+
-				test: /node_modules\/svelte\/.*\.mjs$/,
-				resolve: {
-					fullySpecified: false
-				}
-			}
+    rules: [
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.svelte$/,
+        use: {
+          loader: 'svelte-loader',
+          options: {
+            compilerOptions: {
+              dev: !prod
+            },
+            emitCss: prod,
+            hotReload: !prod,
+              preprocess: sveltePreprocess({ sourceMap: !prod })
+          }
+        }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
+      },
+      {
+        // required to prevent errors from Svelte on Webpack 5+
+        test: /node_modules\/svelte\/.*\.mjs$/,
+        resolve: {
+          fullySpecified: false
+        }
+      }
 		]
 	},
 	mode,
