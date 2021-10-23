@@ -1,5 +1,4 @@
 <script lang='ts'>
-  import { onMount } from 'svelte';
   import { SingleNodeClient } from '@iota/iota.js';
 
   import type { IAddressEntry } from '../../shared/IAddressEntry';
@@ -12,11 +11,7 @@
   let balance: number;
   let error = { present: false, message: ''};
 
-  onMount(async () => {
-    balance = (await client.address('iota1qzd6z226hqz9hqeexmh6yk9gpk424tyrepw7dfpzu3e5w5wqlfpyzl3tnfm')).balance;
-  });
-
-  async function addVerifiedAddress(): Promise<void> {
+  async function verifyAndAddAddress(): Promise<void> {
     try {
       balance = (await client.address(address)).balance;
       addEntry();
@@ -37,7 +32,7 @@
 <div class='container'>
   <p>Enter a valid IOTA Address:</p>
   <input bind:value={address} placeholder='Enter your address'>
-  <button on:click={addVerifiedAddress}>
+  <button on:click={verifyAndAddAddress}>
     Add
   </button>
   
