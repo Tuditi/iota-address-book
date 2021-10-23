@@ -11,7 +11,7 @@ export class DeleteAddressChannel implements IpcChannelInterface<void> {
   constructor(private addressBook: AddressBook) {}
 
   public result(_: IpcMainEvent, request: IpcRequest): void {
-    if (request.data) {
+    if (request.data || request.data === 0) {
       this.addressBook.deleteAddress(request.data as number);
     }
   }
