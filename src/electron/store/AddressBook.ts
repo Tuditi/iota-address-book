@@ -1,5 +1,5 @@
 import Store from 'electron-store';
-import { IAddressEntry } from './IAddressEntry';
+import { IAddressEntry } from '../../shared/IAddressEntry';
 
 const name = 'addresses';
 

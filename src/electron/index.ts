@@ -5,7 +5,7 @@ import * as path from 'path';
 import electronReload from 'electron-reload';
 import { IpcChannelInterface } from './IPC/IpcChannelInterface';
 import { IpcRequest } from '../shared/IpcRequest';
-import { AddressBook } from '../shared/AddressBook';
+import { AddressBook } from './store/AddressBook';
 import { AddAddressChannel } from './IPC/AddAddressChannel';
 import { DeleteAddressChannel } from './IPC/DeleteAddressChannel';
 import { ReadAddressChannel } from './IPC/ReadAddressesChannel';
