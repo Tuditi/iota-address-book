@@ -16,9 +16,9 @@ export class AddressBook {
     this.saveAddresses();
   }
 
-  public deleteAddress(address: IAddressEntry): void {
-    const addresses = this.getAddresses()
-    addresses.splice(addresses.indexOf(address),1);
+  public deleteAddress(index: number): void {
+    const addresses = this.getAddresses();
+    addresses.splice(index,1);
     this.addresses = addresses;
     this.saveAddresses();
   }

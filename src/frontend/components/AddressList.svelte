@@ -23,8 +23,8 @@
     globalThis.api.send(CHANNEL.GET_ADDRESSES, null);
   })
 
-  function removeEntry(entry: IAddressEntry): void {
-    globalThis.api.send(CHANNEL.DELETE_ADDRESS, { data: entry });
+  function removeEntry(index: number): void {
+    globalThis.api.send(CHANNEL.DELETE_ADDRESS, { data: index });
   }
 
   function filterAddresses(filter: string): void {
@@ -73,7 +73,7 @@
             <td>{entry.address}</td>
             <td>{formatBalance(entry.balance)}</td>
             <td>
-              <button class='btn btn-danger px-2' on:click={() => removeEntry(entry)}>
+              <button class='btn btn-danger px-2' on:click={() => removeEntry(i)}>
                 <Trash />
               </button>
             </td>
